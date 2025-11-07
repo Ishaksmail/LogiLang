@@ -1,0 +1,17 @@
+Program       := Header Import* Logic*
+Header        := IDENTIFIER "this" "has" ("many" | "one") ";"
+Import        := "import" IDENTIFIER ("." "*")? ";"
+Logic         := "logic" IDENTIFIER "(" ParamList ")" Block
+ParamList     := "inputs" "=" NUMBER "," "outputs" "=" NUMBER
+Block         := "{" Statement* "}"
+Statement     := VarDecl | Assign | If | While | For | Print | ExprStmt
+VarDecl       := Type IDENTIFIER "=" Expr ";"
+Assign        := ("out" "[" Expr "]" | IDENTIFIER) "=" Expr ";"
+If            := "if" "(" Expr ")" Block ("else" Block)?
+While         := "while" "(" Expr ")" Block
+For           := "for" "(" VarDecl Expr ";" Assign ")" Block
+Print         := "print" "(" STRING ( "+" STRING )* ")" ";"
+Type          := "int" | "bool"
+Expr          := Term (( "+" | "-" | "AND" | "OR" | "XOR" ) Term)*
+Term          := Factor (( "*" | "/" | "mod" | "%" ) Factor)*
+Factor        := NUMBER | IDENTIFIER | "in" "[" Expr "]" | "(" Expr ")" | "NOT" Factor

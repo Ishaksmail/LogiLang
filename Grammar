@@ -1,0 +1,35 @@
+program = header, { import_stmt }, { logic_block };
+
+header = identifier, "this has many", ";";
+import_stmt = "import", identifier, ";";
+
+logic_block = "logic", identifier, "(", parameters, ")", "{", { statement }, "}";
+
+parameters = param_decl, { ",", param_decl };
+param_decl = identifier, "=", number;
+
+statement = assignment, ";";
+assignment = target, "=", expression;
+target = identifier, "[", number, "]";
+
+expression =
+    logic_call
+    | binary_expr
+    | identifier, "[", number, "]"
+    | number
+    ;
+
+logic_call = identifier, "(", argument_list, ")";
+argument_list = expression, { ",", expression };
+
+binary_expr = expression, binary_op, expression;
+binary_op = "AND" | "OR" | "XOR" | "MOD" | "+" | "-" | "*" | "/";
+
+identifier = letter, { letter | digit | "_" };
+number = digit, { digit };
+letter = "A" | "B" | "C" | "D" | "E" | "F" | "G" | "H" | "I" | "J" | "K" | "L" | "M"
+       | "N" | "O" | "P" | "Q" | "R" | "S" | "T" | "U" | "V" | "W" | "X" | "Y" | "Z"
+       | "a" | "b" | "c" | "d" | "e" | "f" | "g" | "h" | "i" | "j" | "k" | "l" | "m"
+       | "n" | "o" | "p" | "q" | "r" | "s" | "t" | "u" | "v" | "w" | "x" | "y" | "z" ;
+
+digit = "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9" ;
