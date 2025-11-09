@@ -1,0 +1,8 @@
+Keywords        := "this" | "has" | "many" | "only" | "import" | "logic" | "n_inp" | "n_out" | "if" | "elif" | "else" | "while" | "for" | "print" | "int" | "bool" | "string" | "out" | "inp" | "AND" | "OR" | "NOT" | "XOR" | "mod"
+Identifiers     := [a-zA-Z_][a-zA-Z0-9_]*
+NUMBER          := [0-9]+
+String          := "[^"]*"
+Operators       := == | != | <= | >= | + | - | * | / | % | =
+Symbols         := \( | \) | \{ | \} | , | \. | ;
+Comments        := //.* | /\*[\s\S]*?\*/
+Whitespace      := \s+

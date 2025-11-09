@@ -1,17 +1,19 @@
-Program       := Header Import* Logic*
-Header        := IDENTIFIER "this" "has" ("many" | "one") ";"
+Program       := Header? Import* Logic*
+Header        := "this" IDENTIFIER "has" ("many" | "only") ";"
 Import        := "import" IDENTIFIER ("." "*")? ";"
 Logic         := "logic" IDENTIFIER "(" ParamList ")" Block
-ParamList     := "inputs" "=" NUMBER "," "outputs" "=" NUMBER
+ParamList     := "n_inp" "=" NUMBER ("," "n_out" "=" NUMBER)?
 Block         := "{" Statement* "}"
 Statement     := VarDecl | Assign | If | While | For | Print | ExprStmt
 VarDecl       := Type IDENTIFIER "=" Expr ";"
 Assign        := ("out" "[" Expr "]" | IDENTIFIER) "=" Expr ";"
-If            := "if" "(" Expr ")" Block ("else" Block)?
+If            := "if" "(" Expr ")" Block ("elif" "(" Expr ")" Block)?("else" Block)?
 While         := "while" "(" Expr ")" Block
 For           := "for" "(" VarDecl Expr ";" Assign ")" Block
-Print         := "print" "(" STRING ( "+" STRING )* ")" ";"
-Type          := "int" | "bool"
-Expr          := Term (( "+" | "-" | "AND" | "OR" | "XOR" ) Term)*
-Term          := Factor (( "*" | "/" | "mod" | "%" ) Factor)*
-Factor        := NUMBER | IDENTIFIER | "in" "[" Expr "]" | "(" Expr ")" | "NOT" Factor
+Print         := "print" "(" Expr ( "+" Expr )* ")" ";"
+Type          := "int" | "bool" | "string"
+LogicExpr     := RelExpr (("AND" | "OR" | "XOR" | "NOT") RelExpr)*
+RelExpr       := Expr (("==" | "!=" | "<" | ">" | "<=" | ">=") Expr)?
+Expr          := Term (("+" | "-") Term)*
+Term          := Factor (("*" | "/" | "mod" | "%") Factor)*
+Factor        := NUMBER | IDENTIFIER | "inp" "[" Expr "]" | "(" Expr ")" | "NOT" Factor
