@@ -1,0 +1,26 @@
+Program       := Header? Import* Logic*
+Header        := "this" IDENTIFIER "has" ("many" | "only") ";"
+Import        := "import" IDENTIFIER ("." "*" | "." IDENTIFIER)? ";"
+Logic         := "logic" IDENTIFIER "(" ParamList ")" Block
+ParamList     := "n_inp" "=" INTEGER "," "n_out" "=" INTEGER
+Block         := "{" Statement* "}"
+Statement     := VarDecl | Assign | If | While | For | Print | Return | ExprStmt
+VarDecl       := Type IDENTIFIER ("=" Expr)? ";"
+Assign        := (OutputAccess | IDENTIFIER) "=" Expr ";"
+If            := "if" "(" Expr ")" Block ("elif" "(" Expr ")" Block)* ("else" Block)?
+While         := "while" "(" Expr ")" Block
+For           := "for" "(" VarDecl Condition ";" Assign ")" Block
+Print         := "print" "(" String ( "+" Expr )* ")" ";"
+Return        := "return" Expr ";"
+Type          := "int" | "bool"
+OutputAccess  := "out" "[" Expr "]"
+InputAccess   := "inp" "[" Expr "]"
+ExprStmt      := FunctionCall ";"
+Condition     := Expr
+FunctionCall  := IDENTIFIER "(" (Expr ("," Expr)*)? ")"
+Expr          := LogicExpr
+LogicExpr     := ComparisonExpr (("AND" | "OR" | "XOR") ComparisonExpr)*
+ComparisonExpr := ArithmeticExpr (("==" | "!=" | "<" | ">" | "<=" | ">=") ArithmeticExpr)?
+ArithmeticExpr := Term (("+" | "-") Term)*
+Term          := Factor (("*" | "/" | "mod" | "%") Factor)*
+Factor        := INTEGER | IDENTIFIER | InputAccess | "(" Expr ")" | "NOT" Factor | FunctionCall
