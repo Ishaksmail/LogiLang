@@ -47,12 +47,6 @@ You are welcome to:
 
 ---
 
-## 📜 License
-
-This project is licensed under the **MIT License** — you are free to use, modify, and share it with attribution.
-
----
-
 
 
 # ⚙️ LogiLang — لغة برمجة موجهة للمنطق
@@ -96,10 +90,3 @@ This project is licensed under the **MIT License** — you are free to use, modi
 * تحسين أداء المفسر أو المترجم.
 * كتابة وثائق أو أمثلة جديدة.
 
-
----
-###  الرخصة
-
-المشروع تحت رخصة **MIT**، مما يعني أنه يمكنك استخدامه وتعديله ومشاركته بحرية مع ذكر المصدر.
-
----
